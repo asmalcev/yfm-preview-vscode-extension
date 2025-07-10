@@ -6,10 +6,10 @@ export function getWebviewContent(
     html: string
 ): string {
     const cssUri = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(context.extensionUri, 'media', 'yfm.css')
+        vscode.Uri.joinPath(context.extensionUri, 'dist', 'yfm.css')
     );
     const jsUri = panel.webview.asWebviewUri(
-        vscode.Uri.joinPath(context.extensionUri, 'media', 'yfm.js')
+        vscode.Uri.joinPath(context.extensionUri, 'dist', 'yfm.js')
     );
 
     return `
@@ -17,14 +17,21 @@ export function getWebviewContent(
     <html lang="en">
     <head>
       <meta charset="UTF-8">
+      <style>
+        body {
+          margin: 0;
+          padding: 2rem;
+          background-color: #fafafa;
+        }
+      </style>
       <link rel="stylesheet" href="${cssUri}" />
     </head>
     <body>
-      ${html}
-      <script src="${jsUri}"></script>
+        <div class="yfm">
+            ${html}
+        </div>
+        <script src="${jsUri}"></script>
     </body>
     </html>
   `;
 }
-
-//   <style>body { font-family: sans-serif; padding: 2em; }</style>

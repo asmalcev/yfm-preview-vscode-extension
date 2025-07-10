@@ -26,8 +26,7 @@ export function activate(context: vscode.ExtensionContext) {
             );
 
             const {
-                result: { html, meta, title, headings },
-                logs,
+                result: { html },
             } = transform(doc.getText(), {});
 
             panel.webview.html = getWebviewContent(context, panel, html);
