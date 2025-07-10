@@ -1,15 +1,20 @@
 import * as vscode from 'vscode';
+import { Config } from './types';
 
 export function getWebviewContent(
     context: vscode.ExtensionContext,
     panel: vscode.WebviewPanel,
-    html: string
+    html: string,
+    theme: Config['theme']
 ): string {
     const cssUri = panel.webview.asWebviewUri(
         vscode.Uri.joinPath(context.extensionUri, 'dist', 'yfm.css')
     );
     const jsUri = panel.webview.asWebviewUri(
         vscode.Uri.joinPath(context.extensionUri, 'dist', 'yfm.js')
+    );
+    const darkCssUri = panel.webview.asWebviewUri(
+        vscode.Uri.joinPath(context.extensionUri, 'dist', 'extension.css')
     );
 
     return `
@@ -21,13 +26,14 @@ export function getWebviewContent(
         body {
           margin: 0;
           padding: 2rem;
-          background-color: #fafafa;
+          background-color: ${theme === 'light' ? '#fafafa' : '#333'};
         }
       </style>
       <link rel="stylesheet" href="${cssUri}" />
+      <link rel="stylesheet" href="${darkCssUri}" />
     </head>
     <body>
-        <div class="yfm">
+        <div class="yfm ${theme === 'dark' ? 'dark' : ''}">
             ${html}
         </div>
         <script src="${jsUri}"></script>

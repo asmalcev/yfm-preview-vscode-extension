@@ -6,7 +6,8 @@
         "name": "Malcev Alexander",
         "email": "i@asmalcev.ru"
     },
-    "version": "0.0.1",
+    "publisher": "asmalcev",
+    "version": "0.0.2",
     "engines": {
         "vscode": "^1.101.0"
     },
@@ -21,44 +22,68 @@
                 "command": "yfm-preview-vscode-extension.startPreview",
                 "title": "Show YFM Preview"
             }
-        ]
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/asmalcev/yfm-preview-vscode-extension.git"
-    },
-    "scripts": {
-        "vscode:prepublish": "npm run package",
-        "compile": "npm run check-types && npm run lint && node esbuild.js",
-        "watch": "npm-run-all -p watch:*",
-        "watch:esbuild": "node esbuild.js --watch",
-        "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-        "package": "npm run check-types && npm run lint && node esbuild.js --production",
-        "compile-tests": "tsc -p . --outDir out",
-        "watch-tests": "tsc -p . -w --outDir out",
-        "pretest": "npm run compile-tests && npm run compile && npm run lint",
-        "check-types": "tsc --noEmit",
-        "lint": "eslint src",
-        "test": "vscode-test",
-        "postinstall": "cp node_modules/@diplodoc/transform/dist/css/yfm.css ./dist/ && cp node_modules/@diplodoc/transform/dist/js/yfm.js ./dist/"
-    },
-    "devDependencies": {
-        "@types/mocha": "^10.0.10",
-        "@types/node": "20.x",
-        "@types/sanitize-html": "^2.16.0",
-        "@types/vscode": "^1.101.0",
-        "@typescript-eslint/eslint-plugin": "^8.31.1",
-        "@typescript-eslint/parser": "^8.31.1",
-        "@vscode/test-cli": "^0.0.11",
-        "@vscode/test-electron": "^2.5.2",
-        "esbuild": "^0.25.3",
-        "eslint": "^9.25.1",
-        "npm-run-all": "^4.1.5",
-        "typescript": "^5.8.3"
-    },
-    "dependencies": {
-        "@diplodoc/transform": "^4.59.0",
-        "highlight.js": "^11.11.1",
-        "sanitize-html": "^2.17.0"
+        ],
+        "configuration": {
+            "title": "YFM Preview Settings",
+            "properties": {
+                "yfm-preview-vscode-extension.theme": {
+                    "type": "string",
+                    "enum": [
+                        "light",
+                        "dark"
+                    ],
+                    "default": "light",
+                    "description": "Preview theme"
+                },
+                "yfm-preview-vscode-extension.liveReload": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Live reload"
+                },
+                "yfm-preview-vscode-extension.liveReloadDelay": {
+                    "type": "number",
+                    "default": 2000,
+                    "description": "Live reload delay"
+                }
+            }
+        },
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/asmalcev/yfm-preview-vscode-extension.git"
+        },
+        "scripts": {
+            "vscode:prepublish": "npm run package",
+            "compile": "npm run check-types && npm run lint && node esbuild.js",
+            "watch": "npm-run-all -p watch:*",
+            "watch:esbuild": "node esbuild.js --watch",
+            "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+            "package": "npm run check-types && npm run lint && node esbuild.js --production",
+            "compile-tests": "tsc -p . --outDir out",
+            "watch-tests": "tsc -p . -w --outDir out",
+            "pretest": "npm run compile-tests && npm run compile && npm run lint",
+            "check-types": "tsc --noEmit",
+            "lint": "eslint src",
+            "test": "vscode-test",
+            "postinstall": "cp node_modules/@diplodoc/transform/dist/css/yfm.css ./dist/ && cp node_modules/@diplodoc/transform/dist/js/yfm.js ./dist/"
+        },
+        "devDependencies": {
+            "@types/mocha": "^10.0.10",
+            "@types/node": "20.x",
+            "@types/sanitize-html": "^2.16.0",
+            "@types/vscode": "^1.101.0",
+            "@typescript-eslint/eslint-plugin": "^8.31.1",
+            "@typescript-eslint/parser": "^8.31.1",
+            "@vscode/test-cli": "^0.0.11",
+            "@vscode/test-electron": "^2.5.2",
+            "esbuild": "^0.25.3",
+            "eslint": "^9.25.1",
+            "npm-run-all": "^4.1.5",
+            "typescript": "^5.8.3"
+        },
+        "dependencies": {
+            "@diplodoc/transform": "^4.59.0",
+            "highlight.js": "^11.11.1",
+            "sanitize-html": "^2.17.0"
+        }
     }
 }
